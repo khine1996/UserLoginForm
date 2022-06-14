@@ -136,28 +136,39 @@
                         placeholder="Enter Password"
                         type="password"
                         formControlName="password"
+                        pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{6,20}$"
                         [type]="hide1 ? 'password' : 'text'"
                       />
                       <mat-icon matSuffix (click)="hide1 = !hide1">{{
                         hide1 ? "visibility_off" : "visibility"
                       }}</mat-icon>
 
-                      <mat-error
-                        *ngIf="
-                          addUserForm.controls['password'] &&
-                          addUserForm.controls['password'].dirty &&
-                          addUserForm.controls['password'].hasError('pattern')
-                        "
-                      >
-                        Use 8 or more characters with a mix of letters, numbers
-                        & symbols.
-                      </mat-error>
+                      <div *ngIf="
+                      (addUserForm.controls['password'] &&
+                      addUserForm.controls['password'].invalid &&
+                        addUserForm.controls['password'].touched) ||
+                        addUserForm.controls['password'].dirty
+                    "
+                  >
+                    <small
+                      *ngIf="addUserForm.controls['password'].errors?.['required']"
+                      class="text-danger"
+                    >
+                      Password is required</small
+                    >
+                    <small
+                      *ngIf="addUserForm.controls['password'].hasError('pattern')"
+                      class="text-danger"
+                      >  Use 8 or more characters with a mix of letters, numbers &
+                      symbols.</small
+                    >
+                  </div>
                     </mat-form-field>
                   </div>
 
                   <!-- </div> -->
                   <!-- <div class="col-lg-4"> -->
-                  <mat-form-field appearance="outline">
+                  <!-- <mat-form-field appearance="outline">
                     <mat-label>Confirm Password</mat-label>
                     <input
                       matInput
@@ -197,6 +208,40 @@
                         Password doesn't match
                       </mat-error>
                     </div>
+                  </mat-form-field> -->
+                  <mat-form-field appearance="outline">
+                    <mat-label>Confirm Password</mat-label>
+                    <input
+                      matInput
+                      placeholder="Enter the same password"
+                      name="confirmPassword"
+                      type="password"
+                      formControlName="confirmPassword"
+                      required
+                      [type]="hide2 ? 'confirmPassword' : 'text'"
+                    />
+                    <mat-icon matSuffix (click)="hide2 = !hide2">{{
+                      hide2 ? "visibility_off" : "visibility"
+                    }}</mat-icon>
+                    <div *ngIf="
+                    (addUserForm.controls['confirmPassword'] &&
+                    addUserForm.controls['confirmPassword'].invalid &&
+                    addUserForm.controls['confirmPassword'].touched) ||
+                    addUserForm.controls['confirmPassword'].dirty
+                  "
+                >
+                  <small
+                    *ngIf="addUserForm.controls['confirmPassword'].errors?.['required']"
+                    class="text-danger"
+                  >
+                    Password is required</small
+                  >
+                  <small
+                    *ngIf="addUserForm.controls['confirmPassword'].hasError('confirmedValidator')"
+                    class="text-danger"
+                    >  Password doesn't match</small
+                  >
+                </div>
                   </mat-form-field>
 
                   <br />

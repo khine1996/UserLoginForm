@@ -1,71 +1,98 @@
-
 <!-- <div class="bg-image"> -->
-  <div  fxLayoutAlign="center center" cdkDrag>
-    <mat-card class="box">
-      <mat-card-header>
-        <div style="text-align:center" >
-          <mat-card-title >
-            Sign In
-          </mat-card-title>
-        </div>
-      </mat-card-header>
-      <mat-card-content>
-        <form #f="ngForm" [formGroup]="loginForm" class="example-form">
-
-              <div class="container">
-                <div class="row">
-                  <div class="col-10 col-sm-20">
-              <mat-form-field appearance="outline" class="example-full-width">
-                <mat-label>Email Address</mat-label>
-                <input
-                  matInput
-                  placeholder="pat@example.com"
-                  formControlName="email"
-                  class="form-input-field"
-                  pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}"
-              /></mat-form-field></div></div>
-
-  <div class="row">
-    <div class="col-10 col-sm-20">
-
-              <mat-form-field appearance="outline">
-                <mat-label>Password</mat-label>
-
-                <input
-                  matInput
-                  name="password"
-                  placeholder="Enter Password"
-                  type="password"
-                  formControlName="password"
-                  required
-                  pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{6,20}$"
-                   [type]="hide ? 'password' : 'text'"
-                />
-                <mat-icon matSuffix (click)="hide = !hide">{{hide? 'visibility_off' :
-                  'visibility'}}</mat-icon>
-
-                <mat-error
-                  *ngIf="
-                  loginForm.controls['password'] &&
-                  loginForm.controls['password'].dirty &&
-                  loginForm.controls['password'].hasError('pattern')
-                  "
-                >
-                Use 8 or more characters with a mix of letters, numbers & symbols.
-                </mat-error>
-              </mat-form-field></div></div>
-
-              <br>
-              <div class="col">
-              <div class="row-5 col-sm-5" text-align="center">
-
-              <button
-                mat-stroked-button
-                (click)="login(f)"
-                [disabled]="!f.valid"
-                class="btn-block"
+<div fxLayoutAlign="center center" cdkDrag>
+  <mat-card class="box">
+    <div style="text-align: center">
+      <mat-card-title> Sign In </mat-card-title>
+    </div>
+    <mat-card-content>
+      <form #f="ngForm" [formGroup]="loginForm">
+        <div class="col">
+          <mat-form-field appearance="outline">
+            <mat-label>Email Address</mat-label>
+            <input
+              matInput
+              placeholder="pat@example.com"
+              formControlName="email"
+              class="form-input-field"
+            />
+            <div
+              *ngIf="
+                (loginForm.controls['email'] &&
+                  loginForm.controls['email'].invalid &&
+                  loginForm.controls['email'].touched) ||
+                loginForm.controls['email'].dirty
+              "
+            >
+              <small
+                *ngIf="loginForm.controls['email'].errors?.['required']"
+                class="text-danger"
               >
-                Log in
-              </button></div></div>
+                Email is required</small
+              >
+              <small
+                *ngIf="loginForm.controls['email'].hasError('pattern')"
+                class="text-danger"
+                >Please provide a valid email address</small
+              >
+            </div>
+          </mat-form-field>
+          <div class="col">
+            <mat-form-field appearance="outline">
+              <mat-label>Password</mat-label>
 
-  </div>
+              <input
+                matInput
+                name="password"
+                placeholder="Enter Password"
+                type="password"
+                formControlName="password"
+                required
+                [type]="hide ? 'password' : 'text'"
+              />
+              <mat-icon matSuffix (click)="hide = !hide">{{
+                hide ? "visibility_off" : "visibility"
+              }}</mat-icon>
+
+              <div *ngIf="
+                (loginForm.controls['password'] &&
+                  loginForm.controls['password'].invalid &&
+                  loginForm.controls['password'].touched) ||
+                loginForm.controls['password'].dirty
+              "
+            >
+              <small
+                *ngIf="loginForm.controls['password'].errors?.['required']"
+                class="text-danger"
+              >
+                Password is required</small
+              >
+              <small
+                *ngIf="loginForm.controls['password'].hasError('pattern')"
+                class="text-danger"
+                >  Use 8 or more characters with a mix of letters, numbers &
+                symbols</small
+              >
+            </div>
+
+            </mat-form-field>
+          </div>
+        </div>
+
+        <br />
+
+        <div class="col" style="text-align: center">
+          <button
+            mat-stroked-button
+            (click)="login(f)"
+            [disabled]="!f.valid"
+            class="btn-block"
+          >
+            Log in
+          </button>
+        </div>
+
+        <!-- </div> -->
+      </form></mat-card-content
+    ></mat-card
+  >
+</div>

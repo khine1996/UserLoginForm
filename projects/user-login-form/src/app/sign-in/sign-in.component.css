@@ -5,14 +5,14 @@
   float: left;
   padding: 60px 50px 40px 50px;
   width: 100%;
-  background: rgb(180, 163, 163);
+  background: #fff;
   border-radius: 10px;
   transform: scale(1);
   -webkit-transform: scale(1);
   -ms-transform: scale(1);
   z-index: 5;
   min-width: fit-content;
-  max-width: 400px;
+  max-width: fit-content;
 }
 
 .bg-image {

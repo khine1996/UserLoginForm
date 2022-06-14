@@ -20,8 +20,11 @@ export class SignInComponent implements OnInit {
   users: User[] = [];
   hide = true;
   loginForm = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
+    password: new FormControl('', [Validators.required,
+      Validators.pattern(
+        /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*#?&^_-]).{8,}/
+      ),]),
   });
   constructor(private router: Router, private userservice: UserService) {}
   login(f: any) {
@@ -33,5 +36,9 @@ export class SignInComponent implements OnInit {
   ngOnInit() {
     // this.userservice.getUserslist().subscribe((users)=>(this.users=users));
   }
+  get email(){
+    return this.loginForm.get('email')
+    }
+
 }
 

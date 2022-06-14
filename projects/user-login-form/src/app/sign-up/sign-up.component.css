@@ -12,16 +12,10 @@
   -ms-transform: scale(1);
   z-index: 5;
   min-width: fit-content;
-  max-width: 400px;
+  max-width: fit-content;
 }
-.header{
-  text-align: center;
-}
-.btn-block {
-  width: auto;
-  padding: 6px 50px 4px 50px;
-  transform: scale(1);
-}
+
+
 .mat-radio-button ~ .mat-radio-button {
   margin-left: 16px;
 }

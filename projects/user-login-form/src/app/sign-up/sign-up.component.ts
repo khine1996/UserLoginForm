@@ -18,49 +18,33 @@ export class SignUpComponent {
   addUserForm;
 
   constructor(private formbuilder: FormBuilder) {
-    this.addUserForm = this.formbuilder.group({
-      firstName: new FormControl(),
-      lastName: new FormControl(),
-      email: new FormControl('', [Validators.required, Validators.email]),
-      address: new FormControl(),
-      gender: new FormControl(),
-      password: new FormControl('', [
-        Validators.required,
-        Validators.pattern(
-          /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*#?&^_-]).{8,}/
-        ),
-      ]),
-      confirmPassword: new FormControl('', [
-        Validators.required,
-
-      ]),
-    },
-    {
-      validator: this.ConfirmedValidator('password', 'confirmPassword'),
-    }
+    this.addUserForm = this.formbuilder.group(
+      {
+        firstName: new FormControl('',[Validators.required]),
+        lastName: new FormControl('', [Validators.required]),
+        email: new FormControl('', [
+          Validators.required,
+          Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
+        ]),
+        address: new FormControl(),
+        gender: new FormControl(),
+        password: new FormControl('', [
+          Validators.required,
+          Validators.pattern(
+            /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*#?&^_-]).{8,}/
+          ),
+        ]),
+        confirmPassword: new FormControl('', [Validators.required]),
+      },
+      {
+        validator: this.ConfirmedValidator('password', 'confirmPassword'),
+      }
     );
   }
-  // {
-  //   Validators: this.mustMatch('password', 'confirmPassword'),
-  // }
-
-  openSnackBar() {
-    // this._snackBar.open('Register Successfully', 'OK', {
-    //   horizontalPosition: this.horizontalPosition,
-    //   verticalPosition: this.verticalPosition,
-    // });
-  }
-
-  // Register(x: any) {
-  //   console.log(x);
-  // }
-
   submituser() {
     console.log(this.addUserForm.value);
   }
-  // get f() {
-  //   return this.addUserForm.controls;
-  // }
+
   // mustMatch(form: FormGroup) {
   //   return (formgroup: FormGroup) => {
   //     const password = form.controls['password'].value;
@@ -95,5 +79,4 @@ export class SignUpComponent {
       return null;
     };
   }
-
 }
