@@ -1,0 +1,71 @@
+
+<!-- <div class="bg-image"> -->
+  <div  fxLayoutAlign="center center" cdkDrag>
+    <mat-card class="box">
+      <mat-card-header>
+        <div style="text-align:center" >
+          <mat-card-title >
+            Sign In
+          </mat-card-title>
+        </div>
+      </mat-card-header>
+      <mat-card-content>
+        <form #f="ngForm" [formGroup]="loginForm" class="example-form">
+
+              <div class="container">
+                <div class="row">
+                  <div class="col-10 col-sm-20">
+              <mat-form-field appearance="outline" class="example-full-width">
+                <mat-label>Email Address</mat-label>
+                <input
+                  matInput
+                  placeholder="pat@example.com"
+                  formControlName="email"
+                  class="form-input-field"
+                  pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}"
+              /></mat-form-field></div></div>
+
+  <div class="row">
+    <div class="col-10 col-sm-20">
+
+              <mat-form-field appearance="outline">
+                <mat-label>Password</mat-label>
+
+                <input
+                  matInput
+                  name="password"
+                  placeholder="Enter Password"
+                  type="password"
+                  formControlName="password"
+                  required
+                  pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{6,20}$"
+                   [type]="hide ? 'password' : 'text'"
+                />
+                <mat-icon matSuffix (click)="hide = !hide">{{hide? 'visibility_off' :
+                  'visibility'}}</mat-icon>
+
+                <mat-error
+                  *ngIf="
+                  loginForm.controls['password'] &&
+                  loginForm.controls['password'].dirty &&
+                  loginForm.controls['password'].hasError('pattern')
+                  "
+                >
+                Use 8 or more characters with a mix of letters, numbers & symbols.
+                </mat-error>
+              </mat-form-field></div></div>
+
+              <br>
+              <div class="col">
+              <div class="row-5 col-sm-5" text-align="center">
+
+              <button
+                mat-stroked-button
+                (click)="login(f)"
+                [disabled]="!f.valid"
+                class="btn-block"
+              >
+                Log in
+              </button></div></div>
+
+  </div>

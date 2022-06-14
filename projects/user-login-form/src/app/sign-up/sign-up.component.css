@@ -1,0 +1,43 @@
+.box {
+  position: relative;
+  top: 0;
+  opacity: 1;
+  float: left;
+  padding: 60px 50px 40px 50px;
+  width: 100%;
+  background: #fff;
+  border-radius: 10px;
+  transform: scale(1);
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  z-index: 5;
+  min-width: fit-content;
+  max-width: 400px;
+}
+.header{
+  text-align: center;
+}
+.btn-block {
+  width: auto;
+  padding: 6px 50px 4px 50px;
+  transform: scale(1);
+}
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 16px;
+}
+.back-image {
+  outline: 1px solid black;
+
+  /* background-image: url("https://material.angular.io/assets/img/examples/shiba1.jpg"); */
+  background-image: url("/../assets/image/5.jpg"),url("/../assets/image/4.jpg"),url("/../assets/image/3.jpg"),url("/../assets/image/2.jpg");
+  background-repeat: no-repeat, no-repeat,no-repeat,no-repeat;
+  background-position: top left,top right, bottom left, bottom right;
+  background-size: auto, auto,contain,contain;
+}
+.content{
+  max-width:700px;
+  margin:auto;
+}
+.error{
+  color:red;
+}
