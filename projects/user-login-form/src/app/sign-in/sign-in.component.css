@@ -26,3 +26,11 @@
   background-position: top left,top right, bottom left, bottom right;
   background-size: auto, auto,auto,auto;
 }
+
+.mat-stroked-button{
+  /* padding: 5px 5px; */
+  margin-right: 20px;
+  font-weight: 600;
+  border:none;
+ }
+

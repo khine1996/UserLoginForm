@@ -7,6 +7,8 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { User } from 'projects/user-login-form/interface/user';
+import { Router } from '@angular/router';
 ;
 
 @Component({
@@ -15,7 +17,7 @@ import {
   styleUrls: ['./sign-in.component.css'],
 })
 export class SignInComponent implements OnInit {
-  userslist:any;
+  userslist:User[]=[];
   hide = true;
   loginForm = new FormGroup({
     email: new FormControl('', [
@@ -29,11 +31,15 @@ export class SignInComponent implements OnInit {
       ),
     ]),
   });
-  constructor(public userservice:UserService) {}
+  constructor(public userservice:UserService,private router:Router) {}
   login(f: any) {
     console.log(this.loginForm.value);
   }
   ngOnInit():void {
-    this.userslist=this.userservice.getUserslist().subscribe((data: any)=>{ this.userslist=data})
+    this.userservice.getUserslist().subscribe((data: any)=>{
+      this.userslist=data})
+  }
+  gotoSignUp(){
+    this.router.navigate( ['SignUp']);
   }
 }

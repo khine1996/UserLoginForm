@@ -8,6 +8,8 @@ import {
   FormBuilder,
 } from '@angular/forms';
 import { UserService } from 'projects/user-login-form/service/user.service';
+import { finalize } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
@@ -18,13 +20,13 @@ export class SignUpComponent {
   hide1: boolean = true;
   hide2: boolean = true;
   success = '';
-  addUserForm;
+  addUserForm:any=FormGroup;
   userslist: User[] = [];
-  msgTrue = false;
 
   constructor(
     private formbuilder: FormBuilder,
-    public userservice: UserService
+    public userservice: UserService,
+    private router:Router
   ) {
     this.addUserForm = this.formbuilder.group(
       {
@@ -45,7 +47,10 @@ export class SignUpComponent {
         confirmPassword: new FormControl('', [Validators.required]),
       },
       {
-        validator: ConfirmedValidator.confirmedValidator('password', 'confirmPassword'),
+        validator: ConfirmedValidator.confirmedValidator(
+          'password',
+          'confirmPassword'
+        ),
       }
     );
   }
@@ -61,10 +66,15 @@ export class SignUpComponent {
     console.log(newformdata);
 
     this.userservice.createUser(newformdata).subscribe((data) => {
-      this.msgTrue = true;
       console.log(data);
     });
-    console.log(this.addUserForm.value);
+
+    // this.userservice.getUserExistStatus(newformdata.email).pipe(finalize(() => {
+    // })).subscribe(res => {
+    //   if(res){
+    //      alert("User Already Exist")
+    //  }
+    // }, err => { });
   }
 
   // mustMatch(form: FormGroup) {
@@ -83,28 +93,22 @@ export class SignUpComponent {
   //     return null; // always return null here since as you'd want the error displayed on the confirmation input
   //   };
   // }
-
-  // ConfirmedValidator(controlName: string, matchingControlName: string) {
-  //   return (formGroup: FormGroup) => {
-  //     const control = formGroup.controls[controlName];
-  //     const matchingControl = formGroup.controls[matchingControlName];
-
-  //     if (!control.value || !matchingControl.value) {
-  //       // if the password or confirmation has not been inserted ignore
-  //       return null;
-  //     }
-  //     if (control.value !== matchingControl.value) {
-  //       matchingControl.setErrors({ confirmedValidator: true });
-  //     } else {
-  //       matchingControl.setErrors(null);
-  //     }
-  //     return null;
-  //   };
-  // }
-
   ngOnInit(): void {
     this.userservice.getUserslist().subscribe((data: any) => {
       this.userslist = data;
     });
+  }
+  // CheckUserExist(f:any) {
+
+  //   this.userservice.getUserExistStatus(f.value.email).pipe(finalize(() => {
+  //   })).subscribe(res => {
+  //     if(res){
+  //        alert("User Already Exist")
+  //    }
+  //   }, err => {
+  //   });
+  // }
+  gotoSignIn(){
+    this.router.navigate( ['SignIn']);
   }
 }

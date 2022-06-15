@@ -19,11 +19,7 @@
   background: #aedbd5;
   display: block;
 }
-.btn-block {
-  width: auto;
-  padding: 6px 50px 4px 50px;
-  transform: scale(1);
-}
+
 .example-container .mat-form-field +.mat-form-field+.mat-form-field{
   margin-left: 16px;
 }

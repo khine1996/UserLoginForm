@@ -18,285 +18,193 @@
             <div class="form-group">
               <div class="col" style="text-align: center">
                 <!-- <mat-grid-list cols="3" rowHeight="5:1"> -->
-                <mat-form-field appearance="outline" class="example-full-width">
-                  <mat-label>Email Address</mat-label>
+                <div class="col">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Email Address</mat-label>
+                    <input
+                      matInput
+                      placeholder="pat@example.com"
+                      formControlName="email"
+                      class="form-input-field"
+                    />
+                    <div
+                      *ngIf="
+                        (addUserForm.controls['email'] &&
+                          addUserForm.controls['email'].invalid &&
+                          addUserForm.controls['email'].touched) ||
+                        addUserForm.controls['email'].dirty
+                      "
+                    >
+                      <small
+                        *ngIf="addUserForm.controls['email'].errors?.['required']"
+                        class="text-danger"
+                      >
+                        Email is required</small
+                      >
+                      <small
+                        *ngIf="
+                          addUserForm.controls['email'].hasError('pattern')
+                        "
+                        class="text-danger"
+                        >Please provide a valid email address</small
+                      >
+                    </div>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+
+            <div style="text-align: center">
+              <mat-form-field appearance="outline">
+                <mat-label> First Name</mat-label>
+                <input
+                  matInput
+                  placeholder="FirstName"
+                  id="firstName"
+                  formControlName="firstName"
+                  required
+                />
+              </mat-form-field>
+            </div>
+            <div style="text-align: center">
+              <mat-form-field appearance="outline">
+                <mat-label> Last Name</mat-label>
+                <input
+                  matInput
+                  placeholder="LastName"
+                  id="lastName"
+                  formControlName="lastName"
+                  required
+                />
+              </mat-form-field>
+            </div>
+            <!-- </mat-grid-title></mat-grid-list -->
+
+            <!-- <div class="col-lg-3"> -->
+            <div style="text-align: center">
+              <mat-form-field appearance="outline">
+                <mat-label>Address</mat-label>
+                <input
+                  matInput
+                  id="address"
+                  placeholder="Address"
+                  formControlName="address"
+                  required
+                />
+              </mat-form-field>
+              <!-- </div> -->
+              <div style="text-align: center">
+                <label>Gender: </label><br />
+                <mat-radio-group formControlName="gender" id="gender" required>
+                  <mat-radio-button value="male" class="form-contorl"
+                    >Male</mat-radio-button
+                  >
+                  <mat-radio-button value="female" class="form-contorl"
+                    >Female</mat-radio-button
+                  >
+                </mat-radio-group>
+              </div>
+              <br />
+              <div style="text-align: center">
+                <mat-form-field appearance="outline">
+                  <mat-label>Password</mat-label>
+
                   <input
                     matInput
-                    placeholder="pat@example.com"
-                    id="email"
-                    formControlName="email"
-                    class="form-input-field"
-                    pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}"
-                /></mat-form-field>
-                <!-- </mat-grid-list> -->
-                <div style="text-align: center">
-                  <!-- <mat-grid-list cols="3" rowHeight="2:3">
-            <mat-grid-title> -->
+                    name="password"
+                    placeholder="Enter Password"
+                    type="password"
+                    id="password"
+                    formControlName="password"
+                    pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{6,20}$"
+                    [type]="hide1 ? 'password' : 'text'"
+                  />
+                  <mat-icon matSuffix (click)="hide1 = !hide1">{{
+                    hide1 ? "visibility_off" : "visibility"
+                  }}</mat-icon>
 
-                  <!-- <mat-form-field appearance="outline">
-                <div class="row">
-                <div class="row">
-                  <div class="col-md-6 col-6 red" style=" border-right: 2px solid rgb(156, 156, 156);" appearance="outline">First Name
-                    <input
-                  matInput
-
-                  formControlName="firstName"
-                  required
-                />
-                  </div>
-                  <div class="col-md-6 col-6 yellow"  appearance="outline">Last Name
-                    <input
-                  matInput
-
-                  formControlName="firstName"
-                  required
-                />
-                  </div>
-                </div>
-              </div>
-              </mat-form-field> -->
-                  <!-- </mat-grid-title> -->
-                </div>
-                <div style="text-align: center">
-                  <mat-form-field appearance="outline">
-                    <mat-label> First Name</mat-label>
-                    <input
-                      matInput
-                      placeholder="FirstName"
-                      id="firstName"
-                      formControlName="firstName"
-                      required
-                    />
-                  </mat-form-field>
-                </div>
-                <div style="text-align: center">
-                  <mat-form-field appearance="outline">
-                    <mat-label> Last Name</mat-label>
-                    <input
-                      matInput
-                      placeholder="LastName"
-                      id="lastName"
-                      formControlName="lastName"
-                      required
-                    />
-                  </mat-form-field>
-                </div>
-                <!-- </mat-grid-title></mat-grid-list -->
-
-                <!-- <div class="col-lg-3"> -->
-                <div>
-                  <mat-form-field appearance="outline">
-                    <mat-label>Address</mat-label>
-                    <input
-                      matInput
-                      id="address"
-                      placeholder="Address"
-                      formControlName="address"
-                      required
-                    />
-                  </mat-form-field>
-                  <!-- </div> -->
-                  <div>
-                    <label style="text-align: left">Gender: </label><br />
-                    <mat-radio-group
-                      formControlName="gender"
-                      id="gender"
-                      required
+                  <div
+                    *ngIf="
+                      (addUserForm.controls['password'] &&
+                        addUserForm.controls['password'].invalid &&
+                        addUserForm.controls['password'].touched) ||
+                      addUserForm.controls['password'].dirty
+                    "
+                  >
+                    <small
+                      *ngIf="addUserForm.controls['password'].errors?.['required']"
+                      class="text-danger"
                     >
-                      <mat-radio-button value="male" class="form-contorl"
-                        >Male</mat-radio-button
-                      >
-                      <mat-radio-button value="female" class="form-contorl"
-                        >Female</mat-radio-button
-                      >
-                    </mat-radio-group>
-                  </div>
-                  <!-- <div class="form-group col">
-                <label class="row-sm-2 row-form-label">*Email</label>
-                <div class="row-sm-10">
-
-                    <input type="text" formControlName="email" class="form-control" placeholder="Enter email">
-
-                </div>
-            </div>
-
-            <div class="form-group col">
-                <label class="row-sm-2 row-form-label">*Address</label>
-                <div class="row-sm-10">
-
-                    <textarea class="form-control" formControlName="address" placeholder="Enter address" rows="3"></textarea>
-
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label class="row-sm-2 row-form-label">*Password</label>
-                <div class="row-sm-10">
-
-                    <input type="password" formControlName="password" class="form-control" placeholder="Enter password">
-
-                </div>
-            </div>-->
-
-                  <!-- <div class="col-lg-4"> -->
-                  <div style="text-align: center">
-                    <mat-form-field appearance="outline">
-                      <mat-label>Password</mat-label>
-
-                      <input
-                        matInput
-                        name="password"
-                        placeholder="Enter Password"
-                        type="password"
-                        id="password"
-                        formControlName="password"
-                        pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{6,20}$"
-                        [type]="hide1 ? 'password' : 'text'"
-                      />
-                      <mat-icon matSuffix (click)="hide1 = !hide1">{{
-                        hide1 ? "visibility_off" : "visibility"
-                      }}</mat-icon>
-
-                      <div
-                        *ngIf="
-                          (addUserForm.controls['password'] &&
-                            addUserForm.controls['password'].invalid &&
-                            addUserForm.controls['password'].touched) ||
-                          addUserForm.controls['password'].dirty
-                        "
-                      >
-                        <small
-                          *ngIf="addUserForm.controls['password'].errors?.['required']"
-                          class="text-danger"
-                        >
-                          Password is required</small
-                        >
-                        <small
-                          *ngIf="
-                            addUserForm.controls['password'].hasError('pattern')
-                          "
-                          class="text-danger"
-                        >
-                          Use 8 or more characters with a mix of letters,
-                          numbers & symbols.</small
-                        >
-                      </div>
-                    </mat-form-field>
-                  </div>
-
-                  <!-- </div> -->
-                  <!-- <div class="col-lg-4"> -->
-                  <!-- <mat-form-field appearance="outline">
-                    <mat-label>Confirm Password</mat-label>
-                    <input
-                      matInput
-                      placeholder="Enter the same password"
-                      name="confirmPassword"
-                      type="password"
-                      formControlName="confirmPassword"
-                      required
-                      [type]="hide2 ? 'confirmPassword' : 'text'"
-                    />
-                    <mat-icon matSuffix (click)="hide2 = !hide2">{{
-                      hide2 ? "visibility_off" : "visibility"
-                    }}</mat-icon>
-                    <div
+                      Password is required</small
+                    >
+                    <small
                       *ngIf="
-                        addUserForm.controls['confirmPassword'].invalid &&
-                        (addUserForm.controls['confirmPassword'].dirty ||
-                          addUserForm.controls['confirmPassword'].touched)
+                        addUserForm.controls['password'].hasError('pattern')
                       "
+                      class="text-danger"
                     >
-                      <mat-error
-                        *ngIf="
-                          addUserForm.controls['confirmPassword'].hasError(
-                            'required'
-                          )
-                        "
-                      >
-                        Password required
-                      </mat-error>
-                      <mat-error
-                        *ngIf="
-                          addUserForm.controls['confirmPassword'].hasError(
-                            'confirmedValidator'
-                          )
-                        "
-                      >
-                        Password doesn't match
-                      </mat-error>
-                    </div>
-                  </mat-form-field> -->
-                  <mat-form-field appearance="outline">
-                    <mat-label>Confirm Password</mat-label>
-                    <input
-                      matInput
-                      placeholder="Enter the same password"
-                      name="confirmPassword"
-                      id="confirmPassword"
-                      type="password"
-                      formControlName="confirmPassword"
-                      required
-                      [type]="hide2 ? 'confirmPassword' : 'text'"
-                    />
-                    <mat-icon matSuffix (click)="hide2 = !hide2">{{
-                      hide2 ? "visibility_off" : "visibility"
-                    }}</mat-icon>
-                    <div
-                      *ngIf="
-                        (addUserForm.controls['confirmPassword'] &&
-                          addUserForm.controls['confirmPassword'].invalid &&
-                          addUserForm.controls['confirmPassword'].touched) ||
-                        addUserForm.controls['confirmPassword'].dirty
-                      "
+                      Use 8 or more characters with a mix of letters, numbers &
+                      symbols.</small
                     >
-                      <small
-                        *ngIf="addUserForm.controls['confirmPassword'].errors?.['required']"
-                        class="text-danger"
-                      >
-                        Password is required</small
-                      >
-                      <small
-                        *ngIf="
-                          addUserForm.controls['confirmPassword'].hasError(
-                            'confirmedValidator'
-                          )
-                        "
-                        class="text-danger"
-                      >
-                        Password doesn't match</small
-                      >
-                    </div>
-                  </mat-form-field>
-
-                  <br />
-                  <div>
-                    <button
-                      mat-stroke-button
-                      color="primary"
-                      [disabled]="!f.valid"
-                    >
-                      Add User
-                    </button>
                   </div>
-                  <br />
-                  <button>
-                    <a
-                      mat-stroke-button
-                      href="/SignIn"
-                      target="_blank"
-                      color="primary"
-                      >Enable Sign In Instead</a
-                    >
-                  </button>
-                </div>
+                </mat-form-field>
               </div>
-            </div></mat-card-content
-          >
+              <mat-form-field appearance="outline">
+                <mat-label>Confirm Password</mat-label>
+                <input
+                  matInput
+                  placeholder="Enter the same password"
+                  name="confirmPassword"
+                  id="confirmPassword"
+                  type="password"
+                  formControlName="confirmPassword"
+                  required
+                  [type]="hide2 ? 'confirmPassword' : 'text'"
+                />
+                <mat-icon matSuffix (click)="hide2 = !hide2">{{
+                  hide2 ? "visibility_off" : "visibility"
+                }}</mat-icon>
+                <div
+                  *ngIf="
+                    (addUserForm.controls['confirmPassword'] &&
+                      addUserForm.controls['confirmPassword'].invalid &&
+                      addUserForm.controls['confirmPassword'].touched) ||
+                    addUserForm.controls['confirmPassword'].dirty
+                  "
+                >
+                  <small
+                    *ngIf="addUserForm.controls['confirmPassword'].errors?.['required']"
+                    class="text-danger"
+                  >
+                    Password is required</small
+                  >
+                  <small
+                    *ngIf="
+                      addUserForm.controls['confirmPassword'].hasError(
+                        'confirmedValidator'
+                      )
+                    "
+                    class="text-danger"
+                  >
+                    Password doesn't match</small
+                  >
+                </div>
+              </mat-form-field>
+
+              <br />
+              <div class="wrapper">
+                <button mat-stroke-button color="primary" [disabled]="!f.valid">
+                  Add User
+                </button>
+
+                <button mat-stroked-button (click)="gotoSignIn()">
+                  Go to Sign In
+                </button>
+              </div>
+            </div>
+          </mat-card-content>
         </form>
-      </div></mat-card
-    >
+      </div>
+    </mat-card>
   </div>
 </div>
-
-<div *ngIf="msgTrue"></div>

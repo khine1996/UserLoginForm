@@ -78,20 +78,23 @@
           </div>
         </div>
 
-        <br />
-
-        <div class="col" style="text-align: center">
+        <!-- <div class="col" style="text-align: center"> -->
+          <div class="wrapper">
           <button
             mat-stroked-button
             (click)="login(f)"
             [disabled]="!f.valid"
             class="btn-block"
           >
-            Log in
+            Sign in
           </button>
-        </div>
+          <br>
 
-        <!-- </div> -->
+        <div>
+        <button mat-stroked-button (click)="gotoSignUp()">
+        Sign Up
+        </button>
+        </div></div>
       </form></mat-card-content
     ></mat-card
   >
