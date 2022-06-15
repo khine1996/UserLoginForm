@@ -1,19 +1,32 @@
 {
-  "posts": [
+  "users": [
     {
       "id": 1,
-      "title": "json-server",
-      "author": "typicode"
-    }
-  ],
-  "comments": [
+      "firstname": "Su",
+      "lastname": "Su",
+      "address": "Yankin",
+      "gender": "Female",
+      "email": "susu@gmail.com",
+      "password": "Susu@123"
+    },
     {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
+      "id": 2,
+      "firstname": "Mya",
+      "lastname": "Mya",
+      "address": "Hlaing",
+      "gender": "Female",
+      "email": "mya@gmail.com",
+      "password": "myamya@123"
+    },
+
+    {
+      "id": 3,
+      "firstname": "Hla",
+      "lastname": "Hla",
+      "address": "Bahan",
+      "gender": "Female",
+      "email": "hlahla@gmail.com",
+      "password": "hlahla@123"
     }
-  ],
-  "profile": {
-    "name": "typicode"
-  }
+  ]
 }

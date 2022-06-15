@@ -7,7 +7,7 @@ import {
 
 export class ConfirmedValidator {
   constructor() {}
-  ConfirmedValidator(controlName: string, matchingControlName: string) {
+  static confirmedValidator(controlName: string, matchingControlName: string) {
     return (formGroup: FormGroup) => {
       const control = formGroup.controls[controlName];
       const matchingControl = formGroup.controls[matchingControlName];

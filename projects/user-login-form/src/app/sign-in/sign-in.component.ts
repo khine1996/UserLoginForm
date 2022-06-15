@@ -1,3 +1,4 @@
+import { UserService } from 'projects/user-login-form/service/user.service';
 import { Component, OnInit } from '@angular/core';
 
 import {
@@ -6,39 +7,33 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
-import { User } from 'projects/user-login-form/interface/user';
-import { UserService } from 'projects/user-login-form/service/user.service';
+;
 
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
-  styleUrls: ['./sign-in.component.css']
+  styleUrls: ['./sign-in.component.css'],
 })
 export class SignInComponent implements OnInit {
-
-  users: User[] = [];
+  userslist:any;
   hide = true;
   loginForm = new FormGroup({
-    email: new FormControl('', [Validators.required,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
-    password: new FormControl('', [Validators.required,
+    email: new FormControl('', [
+      Validators.required,
+      Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
+    ]),
+    password: new FormControl('', [
+      Validators.required,
       Validators.pattern(
         /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*#?&^_-]).{8,}/
-      ),]),
+      ),
+    ]),
   });
-  constructor(private router: Router, private userservice: UserService) {}
+  constructor(public userservice:UserService) {}
   login(f: any) {
     console.log(this.loginForm.value);
-
-    // localStorage.setItem('user', this.loginForm.value);
-    // this.router.navigate(['/home']);
   }
-  ngOnInit() {
-    // this.userservice.getUserslist().subscribe((users)=>(this.users=users));
+  ngOnInit():void {
+    this.userslist=this.userservice.getUserslist().subscribe((data: any)=>{ this.userslist=data})
   }
-  get email(){
-    return this.loginForm.get('email')
-    }
-
 }
-

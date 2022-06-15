@@ -91,11 +91,12 @@ import { MatTreeModule } from '@angular/material/tree';
     MatGridListModule,
     MatRadioModule,
     MatDatepickerModule,
-    MatTooltipModule
+    MatTooltipModule,
+    HttpClientModule
 
 
   ],
-  providers: [ConfirmedValidator],
+  providers: [],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 

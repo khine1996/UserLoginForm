@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../interface/user';
 
@@ -9,12 +9,14 @@ export class UserService {
 
   constructor(private http: HttpClient) {}
   getUserslist() {
-    return this.http.get(`http://localhost:3000/users`);
+    const httpHeader=new HttpHeaders();
+    httpHeader.append('content-type','application/json')
+    return this.http.get<User[]>(`http://localhost:3000/users`);
   }
   createUser(data: User) {
-    // const httpHeaders=new HttpHeaders();
-    // httpHeaders.append('content-type','application/json');
-    return this.http.post<User[]>(`http://localhost:3000/users`, data);
+    const httpHeaders=new HttpHeaders();
+    httpHeaders.append('content-type','application/json');
+    return this.http.post<User>(`http://localhost:3000/users`, data);
   }
   // getUserslist() {
   //   return this.http.get(`http://localhost:3000'/users`);

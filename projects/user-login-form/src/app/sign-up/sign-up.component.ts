@@ -1,3 +1,5 @@
+import { ConfirmedValidator } from './../confirmed.validator';
+import { User } from 'projects/user-login-form/interface/user';
 import { Component, OnInit } from '@angular/core';
 import {
   FormControl,
@@ -5,6 +7,7 @@ import {
   Validators,
   FormBuilder,
 } from '@angular/forms';
+import { UserService } from 'projects/user-login-form/service/user.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -16,11 +19,16 @@ export class SignUpComponent {
   hide2: boolean = true;
   success = '';
   addUserForm;
+  userslist: User[] = [];
+  msgTrue = false;
 
-  constructor(private formbuilder: FormBuilder) {
+  constructor(
+    private formbuilder: FormBuilder,
+    public userservice: UserService
+  ) {
     this.addUserForm = this.formbuilder.group(
       {
-        firstName: new FormControl('',[Validators.required]),
+        firstName: new FormControl('', [Validators.required]),
         lastName: new FormControl('', [Validators.required]),
         email: new FormControl('', [
           Validators.required,
@@ -37,11 +45,25 @@ export class SignUpComponent {
         confirmPassword: new FormControl('', [Validators.required]),
       },
       {
-        validator: this.ConfirmedValidator('password', 'confirmPassword'),
+        validator: ConfirmedValidator.confirmedValidator('password', 'confirmPassword'),
       }
     );
   }
-  submituser() {
+  addnewuser(f: any) {
+    const newformdata = {
+      firstname: f.value.firstName,
+      email: f.value.email,
+      lastname: f.value.lastName,
+      gender: f.value.gender,
+      password: f.value.password,
+      address: f.value.address,
+    };
+    console.log(newformdata);
+
+    this.userservice.createUser(newformdata).subscribe((data) => {
+      this.msgTrue = true;
+      console.log(data);
+    });
     console.log(this.addUserForm.value);
   }
 
@@ -62,21 +84,27 @@ export class SignUpComponent {
   //   };
   // }
 
-  ConfirmedValidator(controlName: string, matchingControlName: string) {
-    return (formGroup: FormGroup) => {
-      const control = formGroup.controls[controlName];
-      const matchingControl = formGroup.controls[matchingControlName];
+  // ConfirmedValidator(controlName: string, matchingControlName: string) {
+  //   return (formGroup: FormGroup) => {
+  //     const control = formGroup.controls[controlName];
+  //     const matchingControl = formGroup.controls[matchingControlName];
 
-      if (!control.value || !matchingControl.value) {
-        // if the password or confirmation has not been inserted ignore
-        return null;
-      }
-      if (control.value !== matchingControl.value) {
-        matchingControl.setErrors({ confirmedValidator: true });
-      } else {
-        matchingControl.setErrors(null);
-      }
-      return null;
-    };
+  //     if (!control.value || !matchingControl.value) {
+  //       // if the password or confirmation has not been inserted ignore
+  //       return null;
+  //     }
+  //     if (control.value !== matchingControl.value) {
+  //       matchingControl.setErrors({ confirmedValidator: true });
+  //     } else {
+  //       matchingControl.setErrors(null);
+  //     }
+  //     return null;
+  //   };
+  // }
+
+  ngOnInit(): void {
+    this.userservice.getUserslist().subscribe((data: any) => {
+      this.userslist = data;
+    });
   }
 }
