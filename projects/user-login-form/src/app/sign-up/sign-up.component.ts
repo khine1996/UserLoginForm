@@ -20,13 +20,13 @@ export class SignUpComponent {
   hide1: boolean = true;
   hide2: boolean = true;
   success = '';
-  addUserForm:any=FormGroup;
+  addUserForm: any = FormGroup;
   userslist: User[] = [];
 
   constructor(
     private formbuilder: FormBuilder,
     public userservice: UserService,
-    private router:Router
+    private router: Router
   ) {
     this.addUserForm = this.formbuilder.group(
       {
@@ -57,24 +57,29 @@ export class SignUpComponent {
   addnewuser(f: any) {
     const newformdata = {
       firstname: f.value.firstName,
-      email: f.value.email,
       lastname: f.value.lastName,
-      gender: f.value.gender,
-      password: f.value.password,
       address: f.value.address,
+      gender: f.value.gender,
+      email: f.value.email,
+      password: f.value.password,
     };
-    console.log(newformdata);
+    // console.log(newformdata);
 
     this.userservice.createUser(newformdata).subscribe((data) => {
       console.log(data);
     });
 
-    // this.userservice.getUserExistStatus(newformdata.email).pipe(finalize(() => {
-    // })).subscribe(res => {
-    //   if(res){
-    //      alert("User Already Exist")
-    //  }
-    // }, err => { });
+    // this.userservice
+    //   .getUserExistStatus(newformdata.email)
+    //   .pipe(finalize(() => {}))
+    //   .subscribe(
+    //     (res) => {
+    //       if ((newformdata.email = this.userslist)) {
+    //         alert('User Already Exist');
+    //       }
+    //     },
+    //     (err) => {}
+    //   );
   }
 
   // mustMatch(form: FormGroup) {
@@ -98,6 +103,9 @@ export class SignUpComponent {
       this.userslist = data;
     });
   }
+  gotoSignIn() {
+    this.router.navigate(['SignIn']);
+  }
   // CheckUserExist(f:any) {
 
   //   this.userservice.getUserExistStatus(f.value.email).pipe(finalize(() => {
@@ -108,7 +116,4 @@ export class SignUpComponent {
   //   }, err => {
   //   });
   // }
-  gotoSignIn(){
-    this.router.navigate( ['SignIn']);
-  }
 }

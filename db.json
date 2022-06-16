@@ -16,7 +16,7 @@
       "address": "Hlaing",
       "gender": "Female",
       "email": "mya@gmail.com",
-      "password": "myamya@123"
+      "password": "Myamya@123"
     },
     {
       "id": 3,
@@ -25,7 +25,7 @@
       "address": "Bahan",
       "gender": "Female",
       "email": "hlahla@gmail.com",
-      "password": "hlahla@123"
+      "password": "Hlahla@123"
     }
   ]
 }

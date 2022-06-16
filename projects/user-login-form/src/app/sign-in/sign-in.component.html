@@ -5,7 +5,7 @@
       <mat-card-title> Sign In </mat-card-title>
     </div>
     <mat-card-content>
-      <form #f="ngForm" [formGroup]="loginForm">
+      <form #f="ngForm" [formGroup]="loginForm" (submit)="login(f)">
         <div class="col">
           <mat-form-field appearance="outline">
             <mat-label>Email Address</mat-label>
@@ -53,33 +53,34 @@
                 hide ? "visibility_off" : "visibility"
               }}</mat-icon>
 
-              <div *ngIf="
-                (loginForm.controls['password'] &&
-                  loginForm.controls['password'].invalid &&
-                  loginForm.controls['password'].touched) ||
-                loginForm.controls['password'].dirty
-              "
-            >
-              <small
-                *ngIf="loginForm.controls['password'].errors?.['required']"
-                class="text-danger"
+              <div
+                *ngIf="
+                  (loginForm.controls['password'] &&
+                    loginForm.controls['password'].invalid &&
+                    loginForm.controls['password'].touched) ||
+                  loginForm.controls['password'].dirty
+                "
               >
-                Password is required</small
-              >
-              <small
-                *ngIf="loginForm.controls['password'].hasError('pattern')"
-                class="text-danger"
-                >  Use 8 or more characters with a mix of letters, numbers &
-                symbols</small
-              >
-            </div>
-
+                <small
+                  *ngIf="loginForm.controls['password'].errors?.['required']"
+                  class="text-danger"
+                >
+                  Password is required</small
+                >
+                <small
+                  *ngIf="loginForm.controls['password'].hasError('pattern')"
+                  class="text-danger"
+                >
+                  Use 8 or more characters with a mix of letters, numbers &
+                  symbols</small
+                >
+              </div>
             </mat-form-field>
           </div>
         </div>
 
         <!-- <div class="col" style="text-align: center"> -->
-          <div class="wrapper">
+        <div class="wrapper">
           <button
             mat-stroked-button
             (click)="login(f)"
@@ -88,13 +89,12 @@
           >
             Sign in
           </button>
-          <br>
+          <br />
 
-        <div>
-        <button mat-stroked-button (click)="gotoSignUp()">
-        Sign Up
-        </button>
-        </div></div>
+          <div>
+            <button mat-stroked-button (click)="gotoSignUp()">Sign Up</button>
+          </div>
+        </div>
       </form></mat-card-content
     ></mat-card
   >

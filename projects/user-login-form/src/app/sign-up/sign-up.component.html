@@ -60,7 +60,6 @@
                 <input
                   matInput
                   placeholder="FirstName"
-                  id="firstName"
                   formControlName="firstName"
                   required
                 />
@@ -72,7 +71,6 @@
                 <input
                   matInput
                   placeholder="LastName"
-                  id="lastName"
                   formControlName="lastName"
                   required
                 />
@@ -86,7 +84,6 @@
                 <mat-label>Address</mat-label>
                 <input
                   matInput
-                  id="address"
                   placeholder="Address"
                   formControlName="address"
                   required
@@ -114,7 +111,6 @@
                     name="password"
                     placeholder="Enter Password"
                     type="password"
-                    id="password"
                     formControlName="password"
                     pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{6,20}$"
                     [type]="hide1 ? 'password' : 'text'"
@@ -155,7 +151,6 @@
                   matInput
                   placeholder="Enter the same password"
                   name="confirmPassword"
-                  id="confirmPassword"
                   type="password"
                   formControlName="confirmPassword"
                   required

@@ -37,4 +37,6 @@
   margin-right: 30px;
   font-weight: 600;
   border:none;
+  cursor: pointer;
+  justify-content: space-between;
  }
