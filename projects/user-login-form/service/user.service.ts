@@ -18,9 +18,9 @@ export class UserService {
     httpHeaders.append('content-type','application/json');
     return this.http.post<User>(`http://localhost:3000/users`, data);
   }
-  getUserExistStatus(email:User) {
-    const url = "http://localhost:3000/users"+email;
-    return this.http.get<User[]>(`http://localhost:3000/users`);
-  }
+  // getUserExistStatus(email:User) {
+  //   const url = "http://localhost:3000/users"+email;
+  //   return this.http.get<User[]>(`http://localhost:3000/users`);
+  // }
 
 }

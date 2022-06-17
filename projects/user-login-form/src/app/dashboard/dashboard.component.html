@@ -1,1 +1,10 @@
-<p>dashboard works!</p>
+<H1>User is Logged In Successfully.
+
+Here is the list of users that are existed in system.</H1>
+
+<h2>
+<li *ngFor="let user of userslist">{{user.email}}</li>
+</h2>
+<form #f="ngForm">
+<button mat-stroked-button (click)="logout(f)">Log Out</button>
+</form>

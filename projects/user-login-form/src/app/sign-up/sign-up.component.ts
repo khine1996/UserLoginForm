@@ -68,6 +68,7 @@ export class SignUpComponent {
     this.userservice.createUser(newformdata).subscribe((data) => {
       console.log(data);
     });
+  }
 
     // this.userservice
     //   .getUserExistStatus(newformdata.email)
@@ -80,7 +81,6 @@ export class SignUpComponent {
     //     },
     //     (err) => {}
     //   );
-  }
 
   // mustMatch(form: FormGroup) {
   //   return (formgroup: FormGroup) => {
@@ -106,14 +106,16 @@ export class SignUpComponent {
   gotoSignIn() {
     this.router.navigate(['SignIn']);
   }
-  // CheckUserExist(f:any) {
-
-  //   this.userservice.getUserExistStatus(f.value.email).pipe(finalize(() => {
-  //   })).subscribe(res => {
-  //     if(res){
-  //        alert("User Already Exist")
-  //    }
-  //   }, err => {
-  //   });
-  // }
+  signup(data:any){
+    if (data.email) {
+      this.userslist.forEach((item:any) => {
+        if (item.email === data.email) {
+      console.log("User is Already Existing in System")
+        }
+        else {
+          console.log("User is created Successfully")
+        }
+      });
+    }
+  }
 }

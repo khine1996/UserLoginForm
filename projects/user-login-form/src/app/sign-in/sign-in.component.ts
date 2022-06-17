@@ -37,18 +37,31 @@ export class SignInComponent implements OnInit {
     });
   }
   login(data: any) {
-    // console.log(this.loginForm.value);
+    console.log(this.loginForm.value);
 
     if (data.email) {
-      this.userslist.forEach((item) => {
-        if (item.email == data.email && item.password == data.password) {
-          console.log('User is Valid');
-        } else  {
-          console.log('User is Invalid');
+      this.userslist.forEach((item:any) => {
+        if (item.email === data.email && item.password === data.password) {
+        localStorage.setItem("isLoggedIn","true");
+        this.router.navigate(['Dashboard']);
+        }
+        else {
+          localStorage.clear();
         }
       });
     }
+    // if (data.email) {
+    //   console.log(this.userslist.length);
+    //   this.userslist.forEach((item: any) => {
+    //     if (item.email === data.email && item.password === data.password)
+    //       {console.log('user is valid');}
+    //      else
+    //       console.log('user is invalid');
+
+    //   });
+    // }
   }
+
   ngOnInit(): void {
     this.userservice.getUserslist().subscribe((data: any) => {
       this.userslist = data;

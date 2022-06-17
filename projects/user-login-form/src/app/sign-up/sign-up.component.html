@@ -188,7 +188,7 @@
 
               <br />
               <div class="wrapper">
-                <button mat-stroke-button color="primary" [disabled]="!f.valid">
+                <button mat-stroke-button color="primary" [disabled]="!f.valid" (click)="signup(f.value)">
                   Add User
                 </button>
 
